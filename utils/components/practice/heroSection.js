@@ -6,10 +6,7 @@ export default function Practice() {
     <>
       <div className="page-container column center">
         <div className="h-container column center">
-          <h1>
-            bsjbdabaib <br /> oasosandbioad <br />
-            asjnjasjbuisadb
-          </h1>
+          <h1>bsjbdabaib <br /> oasosandbioad <br />asjnjasjbuisadb</h1>
         </div>
 
         <Image

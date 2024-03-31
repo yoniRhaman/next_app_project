@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  
 }
 
 .column {
@@ -12,6 +11,9 @@
 .center {
   justify-content: center;
   align-items: center;
+}
+.page-container {
+  background-color: cornflowerblue;
 }
 
 .h-container {
@@ -26,5 +28,65 @@ h1 {
   font-weight: 900;
   color: white;
 }
-img {
+.top-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+}
+.top-container h1 {
+  font-size: 30px;
+  font-weight: 400;
+  color: black;
+  margin-bottom: 10px;
+}
+.top-container P {
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+  margin-bottom: 100px;
+}
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.container-exciting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container-exciting p {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.container-exciting a {
+  font-size: 35px;
+  color: skyblue;
+  margin-bottom: 50px;
+}
+
+.end-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+
+.end-container p {
+  font-size: 10px;
+  color: black;
+  margin-bottom: 5px;
+}
+.end-container h1 {
+  font-size: 30px;
+  color: black;
+  margin-bottom: 100px;
+}
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
