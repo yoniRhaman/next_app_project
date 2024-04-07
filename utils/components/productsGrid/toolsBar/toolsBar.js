@@ -20,6 +20,6 @@ export default function ToolsBar({ sortBy, setSortBy, setSearch }) {
         placeholder="Search..."
         onChange={(e) => setSearch(e.target.value)}
       />
-    </div>
-  );
+    </div>
+  );
 }

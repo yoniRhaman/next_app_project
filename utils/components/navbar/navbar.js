@@ -1,50 +1,45 @@
+"use client";
 import Link from "next/link";
-import "./navbar.css";
 import { links } from "@/utils/data/links";
+import { usePathname, useRouter } from "next/navigation";
+import "./navbar.css";
+import { nanoid } from "nanoid";
+import { Button } from "@mui/material";
+import { deleteCookie } from "cookies-next";
 
 export default function Navbar() {
-  // const [openLogin, setOpenLogin] = useState(false);
-  // const [openRegister, setOpenRegister] = useState(false);
-  // const { token, setToken } = useLoginContext();
+  const pathname = usePathname();
+  const router = useRouter();
   return (
     <nav className="container">
       <ul className="link-list">
-        {links
-          .filter((item) => !item.excluded)
-          .map((item) => (
-            <NavItem link={item} />
-          ))}
+        {links.map((link) => (
+          <NavItem
+            key={nanoid()}
+            link={link}
+            current={pathname === link.href}
+          />
+        ))}
       </ul>
-      {/* {token ? (
-        <button onClick={() => setToken(null)}>SignOut</button>
-      ) : (
-        <div className="row">
-          <button onClick={() => setOpenRegister(true)} variant="outlined">
-            Register
-          </button>
-          <Button onClick={() => setOpenLogin(true)} variant="outlined">
-            Login
-          </Button>
-        </div>
-      )} */}
-      {/* {openLogin && <LoginModal setOpen={setOpenLogin} />}
-      {openRegister && <RegistrationModal setOpen={setOpenRegister} />} */}
+      <Button
+        onClick={() => {
+          deleteCookie("token");
+          router.push("/login");
+          router.refresh();
+        }}
+      >
+        Logout
+      </Button>
     </nav>
   );
 }
 
-function NavItem({ link }) {
+function NavItem({ link, current }) {
   return (
     <li className="list-item">
-      <Link
-        className={`link 
-        
-        `}
-        href={link.href}
-      >
+      <Link className={`link ${current && "current"}`} href={link.href}>
         {link.title}
       </Link>
-          
     </li>
   );
 }

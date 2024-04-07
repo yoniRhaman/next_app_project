@@ -1,25 +1,28 @@
 import axios from "axios";
-const SERVER_URL = "http://localhost:3001";
-export async function getAllSpeakers() {
+// const SERVER_URL = ;
+const SERVER_URL =
+  process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
+    ? "http://localhost:3001"
+    : "https://shkalim-rishoni-backend.onrender.com";
+export async function getAllSpeakers(token) {
   try {
-    const response = await axios.get(`${SERVER_URL}/products`, {
+    const response = await fetch(`${SERVER_URL}/products`, {
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWYxYjRiYzM0ZGU3MDFkZTQ1ZmI0NWIiLCJpYXQiOjE3MTA4NDg5Njh9.7LB90G1SGP6T4-q9lWU9Tz2Md2QHOzxFtNB10kUfNU0",
+        Authorization: `Bearer ${token}`,
       },
     });
-    return response.data;
+    const data = await response.json();
+    return data;
   } catch (error) {
     throw new Error(error.message);
   }
 }
 
-export async function createNewProduct(body) {
+export async function createNewProduct(body, token) {
   try {
     const response = await axios.post(`${SERVER_URL}/products`, body, {
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWYxYjRiYzM0ZGU3MDFkZTQ1ZmI0NWIiLCJpYXQiOjE3MTA4NDg5Njh9.7LB90G1SGP6T4-q9lWU9Tz2Md2QHOzxFtNB10kUfNU0",
+        Authorization: `Bearer ${token}`,
       },
     });
     return response.data;
@@ -54,5 +57,81 @@ export async function getNews() {
     return response.data;
   } catch (error) {
     throw new Error(error);
+  }
+}
+
+export async function deleteProduct(_id, token) {
+  try {
+    const response = await axios.delete(`${SERVER_URL}/products/${_id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function getProductById(_id, token) {
+  try {
+    const response = await fetch(`${SERVER_URL}/products/${_id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function createTodo(_id, body, token) {
+  try {
+    const response = await axios.post(`${SERVER_URL}/todos/${_id}`, body, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function getAlUserTodos(_id, token) {
+  try {
+    const response = await fetch(`${SERVER_URL}/todos/${_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function updateTodoById(_id, token) {
+  try {
+    const response = await axios.patch(
+      `${SERVER_URL}/todos/${_id}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function deleteTodoById(_id, token) {
+  try {
+    const response = await axios.delete(`${SERVER_URL}/todos/${_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
   }
 }

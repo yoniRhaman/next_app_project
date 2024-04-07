@@ -4,6 +4,6 @@ export default function Loading() {
   return (
     <div className="column center middleware-height">
       <CircularProgress />
-    </div>
-  );
+    </div>
+  );
 }
